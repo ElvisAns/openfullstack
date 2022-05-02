@@ -8,7 +8,6 @@ const [a,b,c,d,...rest] = list
 console.log(a)
 console.log(rest)
 
-
 const filtered = list.filter((value)=>{
     if(value%2==0) return value
 })
