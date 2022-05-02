@@ -1,4 +1,3 @@
-import {useState} from 'react'
 
 const Header = (props)=>{
     return (<h1>{props.course}</h1>)
@@ -33,13 +32,8 @@ const Total= (props) => {
         <p>Number of exercises {total}</p>
     )
 }
-const Button = (props)=>{
-    return (
-        <p><button onClick={props.callback}>{props.text}</button></p>
-    )
-}
+
 const App = () => {
-    const [exec,update] = useState(0);
 
     const course = {
     name : 'Half Stack application development',
@@ -47,7 +41,7 @@ const App = () => {
         [
             {
                 name: 'Fundamentals of React',
-                exercice : exec
+                exercice : 10
             },
             {
                 name: 'Using props to pass data',
@@ -60,18 +54,9 @@ const App = () => {
         ]
     }
 
-    const handleClick = ()=>{
-        update(0);
-    }
-    const handleClickInc = ()=>{
-        update(exec+1);
-    }
-
   return (
     <div>
       <Header course={course.name} />
-      <Button callback={handleClick} text="Reset"/>
-      <Button callback={handleClickInc} text="Increase"/>
       <Content parts={course.parts} />
       <Total parts={course.parts}/>
     </div>
