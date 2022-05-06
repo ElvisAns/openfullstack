@@ -57,14 +57,56 @@ const StatisticsOveral= ({data}) =>{
   }
 }
 
-const Quote = ({text})=><p className='quote'><blockquote>{text}</blockquote></p>
+const Quote = ({text})=>{
+  const [content,votess] =text
+
+  if(votess)
+  return(
+    <div>
+      <blockquote>{content}</blockquote>
+      <p>has {votess} votes</p>
+    </div>
+  )
+  else
+  return(
+    <div>
+      <blockquote>{content}</blockquote>
+    </div>
+  )
+
+}
 const StatTitle = (prop)=><div><h1>{prop.text}</h1></div>
+
+
 
 const App = () => {
   // save clicks of each button to its own state
   const [good, setToGood] = useState(0)
   const [neutral, setToNeutral] = useState(0)
   const [bad, setToBad] = useState(0)
+  const [selected, setSelected] = useState(0)
+  const [votes, upVote] = useState([])
+
+  const quotes =[
+   "The key to performance is elegance, not battalions of special cases.",
+   "Hiring people to write code to sell is not the same as hiring people to design and build durable, usable, dependable software.",
+   "You can't have great software without a great team, and most software teams behave like dysfunctional families.",
+   "... programming requires more concentration than other activities. It's the reason programmers get upset about 'quick interruptions' - such interruptions are tantamount to asking a juggler to keep three balls in the air and hold your groceries at the same time",
+   "If you cannot grok the overall structure of a program while taking a shower, you are not ready to code it.",
+   "When to use iterative development? You should use iterative development only on projects that you want to succeed.",
+   "There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult.",
+   "Before software can be reusable it first has to be usable.","Design and programming are human activities; forget that and all is lost.",
+   "It's better to wait for a productive programmer to become available than it is to wait for the first available programmer to become productive.",
+   "Good code is its own best documentation. As you’re about to add a comment, ask yourself, How can I improve the code so that this comment isn’t needed?’ Improve the code and then document it to make it even clearer.", 
+   "Documentation is the castor oil of programming. Managers think it is good for programmers and programmers hate it!.",
+   "One principle problem of educating software engineers is that they will not use a new method until they believe it works and, more importantly, that they will not believe the method will work until they see it for themselves.",
+   "It's hard enough to find an error in your code when you're looking for it; it's even harder when you've assumed your code is error-free.",
+   "More computing sins are committed in the name of efficiency (without necessarily achieving it) than for any other single reason - including blind stupidity.",
+   "The belief that complex systems require armies of designers and programmers is wrong. A system that is not understood in its entirety, or at least to a significant degree of detail by a single individual, should probably not be built.",
+   "Program testing can be used to show the presence of bugs, but never to show their absence!","Every good work of software starts by scratching a developer's personal itch",
+   "Even the best planning is not so omniscient as to get it right the first time.","Adding manpower to a late software project makes it later!",
+   "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time."
+  ]
 
   const setGood = () => {
     setToGood(good+1)
@@ -78,6 +120,17 @@ const App = () => {
     setToNeutral(neutral+1)
   }
 
+  const NextQuote = ()=>{
+    let maxi = (quotes.length-1) * Math.random()
+    maxi = Math.round(maxi)
+    setSelected(maxi)
+  }
+
+  const vote = index=>{
+    let cur = votes
+    cur[index] =  cur[index]?(cur[index]+1):1
+    upVote(cur)
+  }
 
 
   return (
@@ -94,7 +147,9 @@ const App = () => {
       <StatisticsOveral data={{good:good,neutral:neutral,bad:bad}} />
       
       <StatTitle text="Anecdotes"/>
-      <Quote text="Hello" />
+      <Quote text={[quotes[selected],votes[selected]]} />
+      <Buttons callback={NextQuote} text="NextQuote" />
+      <Buttons callback={()=>vote(selected)} text="Vote it!" />
 
     </div>
   )
