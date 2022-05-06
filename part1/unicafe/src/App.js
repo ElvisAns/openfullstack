@@ -58,6 +58,20 @@ const StatisticsOveral= ({data}) =>{
 }
 
 const Quote = ({text})=><blockquote>{text}</blockquote>
+const BestQuote = ({quotes,votes})=>{
+  console.log(votes)
+  let max = []
+  max[0]=0 //votes
+  max[1] = 0 //index
+
+  votes.forEach((votes,index)=>{
+    if(max[0]<votes){
+      max[0] = votes
+      max[1] = index
+     }
+    }
+  )
+}
 const CountVote =({votes,sel})=>{
   let text = votes[sel]??"no"
   return(
@@ -95,8 +109,7 @@ const App = () => {
    "Even the best planning is not so omniscient as to get it right the first time.","Adding manpower to a late software project makes it later!",
    "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time."
   ]
-
-  const [votes, upVote] = useState([].fill(0,0,quotes.length))
+  const [votes, upVote] = useState(Array(quotes.length-1).fill(0))
 
   const setGood = () => {
     setToGood(good+1)
@@ -143,6 +156,9 @@ const App = () => {
       </div>
       <Buttons callback={NextQuote} text="NextQuote" />
       <Buttons callback={()=>vote(selected)} text="Vote it!" />
+
+      <StatTitle text="Anecdote with most votes"/>
+      <BestQuote text={quotes} votes={votes} />
 
     </div>
   )
