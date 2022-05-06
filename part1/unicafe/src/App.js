@@ -5,7 +5,7 @@ const Statistics = ({text,count}) =>{
   if(!count){
     return(
       <>
-        
+      
       </>
     )
   }
@@ -16,15 +16,17 @@ const Statistics = ({text,count}) =>{
   )
 }
 
-const Head=()=><div>Give feedback</div>
+const Head=()=><div><h1>Give feedback</h1></div>
 const Buttons=({callback,text})=><button onClick={callback}>{text}</button>
 const StatisticsOveral= ({data}) =>{
   const {good,neutral,bad}=data
   let all = good+neutral+bad
   let average = all/3
-  average = average.toFixed(2)
+  average = average.toFixed(1)
   let positive = (all===0?0:((good/all)*100))
-  positive = positive.toFixed(2)
+  positive = positive.toFixed(1)
+
+  if(all){
   return(
     <table>
       <tbody>
@@ -43,7 +45,17 @@ const StatisticsOveral= ({data}) =>{
       </tbody>
     </table>
   )
+  }
+  else{
+    return(
+      <div>
+        No feedback yet provided
+      </div>
+    )
+  }
 }
+
+const StatTitle = ()=><div><h1>Statistics</h1></div>
 
 const App = () => {
   // save clicks of each button to its own state
@@ -51,9 +63,10 @@ const App = () => {
   const [neutral, setToNeutral] = useState(0)
   const [bad, setToBad] = useState(0)
 
-  function setGood(){
+  const setGood = () => {
     setToGood(good+1)
   }
+
   function setBad(){
     setToBad(bad+1)
   }
@@ -71,6 +84,7 @@ const App = () => {
       <Buttons callback={setNeutral} text="Neutral" />
       <Buttons callback={setBad} text="Bad" />
 
+      <StatTitle />
       <Statistics text="Good" count={good} />
       <Statistics text="Neutral" count={neutral} />
       <Statistics text="Bad" count={bad} />
