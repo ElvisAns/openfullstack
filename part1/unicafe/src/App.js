@@ -1,14 +1,6 @@
 import { useState } from 'react'
 
 const Statistics = ({text,count}) =>{
-
-  if(!count){
-    return(
-      <>
-      
-      </>
-    )
-  }
   return(
     <tr>
         <td>{text}</td><td>{count}</td>
