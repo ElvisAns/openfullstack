@@ -43,7 +43,7 @@ const StatisticsOveral= ({data}) =>{
   else{
     return(
       <div>
-        No feedback yet provided
+        No feedback provided yet
       </div>
     )
   }
