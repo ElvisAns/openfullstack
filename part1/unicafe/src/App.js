@@ -142,11 +142,15 @@ const App = () => {
       <Buttons callback={setBad} text="Bad" />
 
       <StatTitle text="Statistics"/>
-      <div className='tblcontainer'><table>
-      <Statistics text="Good" count={good} />
-      <Statistics text="Neutral" count={neutral} />
-      <Statistics text="Bad" count={bad} />
-      </table></div>
+      <div className='tblcontainer'>
+        <table>
+            <tbody>
+              <Statistics text="Good" count={good} />
+              <Statistics text="Neutral" count={neutral} />
+              <Statistics text="Bad" count={bad} />
+            </tbody>
+        </table>
+      </div>
       <StatisticsOveral data={{good:good,neutral:neutral,bad:bad}} />
       
       <StatTitle text="Anecdote of the day"/>
