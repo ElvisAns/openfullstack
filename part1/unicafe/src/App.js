@@ -20,29 +20,48 @@ const Head=()=><div>Give feedback</div>
 const Buttons=({callback,text})=><button onClick={callback}>{text}</button>
 const StatisticsOveral= ({data}) =>{
   const {good,neutral,bad}=data
+  let all = good+neutral+bad
+  let average = all/3
+  average = average.toFixed(2)
+  let positive = (all===0?0:((good/all)*100))
+  positive = positive.toFixed(2)
   return(
     <table>
-      <tr>
-        <th>All</th>
-        <td>{good}</td>
-      </tr>
-      <tr>
-        <th>Average</th>
-        <td>{neutral}</td>
-      </tr>
-      <tr>
-        <th>Positive</th>
-        <td>{bad}</td>
-      </tr>
+      <tbody>
+        <tr>
+          <th>All</th>
+          <td>{all}</td>
+        </tr>
+        <tr>
+          <th>Average</th>
+          <td>{average}</td>
+        </tr>
+        <tr>
+          <th>Positive</th>
+          <td>{positive}%</td>
+        </tr>
+      </tbody>
     </table>
   )
 }
 
 const App = () => {
   // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [good, setToGood] = useState(0)
+  const [neutral, setToNeutral] = useState(0)
+  const [bad, setToBad] = useState(0)
+
+  function setGood(){
+    setToGood(good+1)
+  }
+  function setBad(){
+    setToBad(bad+1)
+  }
+
+  function setNeutral(){
+    setToNeutral(neutral+1)
+  }
+
 
 
   return (
