@@ -11,7 +11,7 @@ const Statistics = ({text,count}) =>{
   }
   return(
     <div>
-        {text} : {count}
+        <p>{text} : {count}</p>
     </div>
   )
 }
