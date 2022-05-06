@@ -75,6 +75,7 @@ const BestQuote = ({quotes,votes})=>{
   return(
     <div>
       <blockquote>{quotes[max[1]]}</blockquote>
+      <p>has {max[0]===0?"no":max[0]} votes</p>
     </div>
   )
 }
@@ -155,7 +156,7 @@ const App = () => {
       <Statistics text="Bad" count={bad} />
       <StatisticsOveral data={{good:good,neutral:neutral,bad:bad}} />
       
-      <StatTitle text="Anecdotes"/>
+      <StatTitle text="Anecdote of the day"/>
       <div className='quote-container'>
         <Quote text={quotes[selected]} />
         <CountVote votes={votes} sel={selected} />
