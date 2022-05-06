@@ -57,7 +57,8 @@ const StatisticsOveral= ({data}) =>{
   }
 }
 
-const StatTitle = ()=><div><h1>Statistics</h1></div>
+const Quote = ({text})=><p className='quote'><blockquote>{text}</blockquote></p>
+const StatTitle = (prop)=><div><h1>{prop.text}</h1></div>
 
 const App = () => {
   // save clicks of each button to its own state
@@ -86,11 +87,15 @@ const App = () => {
       <Buttons callback={setNeutral} text="Neutral" />
       <Buttons callback={setBad} text="Bad" />
 
-      <StatTitle />
+      <StatTitle text="Statistics"/>
       <Statistics text="Good" count={good} />
       <Statistics text="Neutral" count={neutral} />
       <Statistics text="Bad" count={bad} />
       <StatisticsOveral data={{good:good,neutral:neutral,bad:bad}} />
+      
+      <StatTitle text="Anecdotes"/>
+      <Quote text="Hello" />
+
     </div>
   )
 }
