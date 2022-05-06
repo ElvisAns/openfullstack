@@ -57,23 +57,12 @@ const StatisticsOveral= ({data}) =>{
   }
 }
 
-const Quote = ({text})=>{
-  const [content,votess] =text
-
-  if(votess)
+const Quote = ({text})=><blockquote>{text}</blockquote>
+const CountVote =({votes,sel})=>{
+  let text = votes[sel]??"no"
   return(
-    <div>
-      <blockquote>{content}</blockquote>
-      <p>has {votess} votes</p>
-    </div>
+    <p>has {text} vote(s)</p>
   )
-  else
-  return(
-    <div>
-      <blockquote>{content}</blockquote>
-    </div>
-  )
-
 }
 const StatTitle = (prop)=><div><h1>{prop.text}</h1></div>
 
@@ -85,7 +74,6 @@ const App = () => {
   const [neutral, setToNeutral] = useState(0)
   const [bad, setToBad] = useState(0)
   const [selected, setSelected] = useState(0)
-  const [votes, upVote] = useState([])
 
   const quotes =[
    "The key to performance is elegance, not battalions of special cases.",
@@ -108,6 +96,8 @@ const App = () => {
    "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time."
   ]
 
+  const [votes, upVote] = useState([].fill(0,0,quotes.length))
+
   const setGood = () => {
     setToGood(good+1)
   }
@@ -127,7 +117,7 @@ const App = () => {
   }
 
   const vote = index=>{
-    let cur = votes
+    let cur = [...votes]
     cur[index] =  cur[index]?(cur[index]+1):1
     upVote(cur)
   }
@@ -147,7 +137,10 @@ const App = () => {
       <StatisticsOveral data={{good:good,neutral:neutral,bad:bad}} />
       
       <StatTitle text="Anecdotes"/>
-      <Quote text={[quotes[selected],votes[selected]]} />
+      <div className='quote-container'>
+        <Quote text={quotes[selected]} />
+        <CountVote votes={votes} sel={selected} />
+      </div>
       <Buttons callback={NextQuote} text="NextQuote" />
       <Buttons callback={()=>vote(selected)} text="Vote it!" />
 
