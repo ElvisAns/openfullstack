@@ -1,22 +1,35 @@
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import { useState } from 'react'
+
+const Statistic_Line = ({text,count}) =>{
+
+  if(!count){
+    return(
+      <>
+        
+      </>
+    )
+  }
+  return(
+    <div>
+        {text} : {count}
     </div>
-  );
+  )
 }
 
-export default App;
+const Head=()=><div>Give feedback</div>
+const Buttons
+
+const App = () => {
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  return (
+    <div>
+      <Head />
+    </div>
+  )
+}
+
+export default App
