@@ -71,6 +71,12 @@ const BestQuote = ({quotes,votes})=>{
      }
     }
   )
+
+  return(
+    <div>
+      <blockquote>{quotes[max[1]]}</blockquote>
+    </div>
+  )
 }
 const CountVote =({votes,sel})=>{
   let text = votes[sel]??"no"
@@ -158,7 +164,7 @@ const App = () => {
       <Buttons callback={()=>vote(selected)} text="Vote it!" />
 
       <StatTitle text="Anecdote with most votes"/>
-      <BestQuote text={quotes} votes={votes} />
+      <BestQuote quotes={quotes} votes={votes} />
 
     </div>
   )
