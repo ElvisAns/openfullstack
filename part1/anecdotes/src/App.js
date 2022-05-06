@@ -67,7 +67,7 @@ const App = () => {
     setSelected(maxi)
   }
 
-  const vote = index=>{
+  const vote = index => {
     let cur = [...votes]
     cur[index] =  cur[index]?(cur[index]+1):1
     upVote(cur)
