@@ -10,9 +10,9 @@ const Statistics = ({text,count}) =>{
     )
   }
   return(
-    <div>
-        <p>{text} : {count}</p>
-    </div>
+    <tr>
+        <td>{text}</td><td>{count}</td>
+    </tr>
   )
 }
 
@@ -59,7 +59,6 @@ const StatisticsOveral= ({data}) =>{
 
 const Quote = ({text})=><blockquote>{text}</blockquote>
 const BestQuote = ({quotes,votes})=>{
-  console.log(votes)
   let max = []
   max[0]=0 //votes
   max[1] = 0 //index
@@ -151,9 +150,11 @@ const App = () => {
       <Buttons callback={setBad} text="Bad" />
 
       <StatTitle text="Statistics"/>
+      <div className='tblcontainer'><table>
       <Statistics text="Good" count={good} />
       <Statistics text="Neutral" count={neutral} />
       <Statistics text="Bad" count={bad} />
+      </table></div>
       <StatisticsOveral data={{good:good,neutral:neutral,bad:bad}} />
       
       <StatTitle text="Anecdote of the day"/>
