@@ -28,6 +28,7 @@ const StatisticsOveral= ({data}) =>{
 
   if(all){
   return(
+    <div className='tblcontainer'>
     <table>
       <tbody>
         <tr>
@@ -44,6 +45,7 @@ const StatisticsOveral= ({data}) =>{
         </tr>
       </tbody>
     </table>
+    </div>
   )
   }
   else{
