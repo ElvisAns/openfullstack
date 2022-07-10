@@ -1,9 +1,8 @@
 const global={
-    total:
-        {
-            fontWeight:'900',
-            color:'blue'
-        },
+    total:{
+        fontWeight:'900',
+        color:'blue'
+    },
     body:{
         backgroundColor:'#eee',
         padding:'90px',

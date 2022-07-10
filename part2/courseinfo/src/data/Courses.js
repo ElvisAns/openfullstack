@@ -48,4 +48,4 @@ const courses_datas = [
     }
   ]
 
-  export default courses_datas
+export default courses_datas

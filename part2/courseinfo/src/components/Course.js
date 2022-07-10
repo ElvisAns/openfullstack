@@ -12,7 +12,6 @@ const Content = ({parts})=>{
     )
 }
 
-
 const Total= ({parts}) => {
     const list = parts.map(el=>el.exercises)
     const total = list.reduce((prev,next)=>prev+next)
