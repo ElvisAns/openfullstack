@@ -14,7 +14,6 @@ const Content = ({parts})=>{
 
 
 const Total= ({parts}) => {
-    console.log(parts);
     const list = parts.map(el=>el.exercises)
     const total = list.reduce((prev,next)=>prev+next)
     return (
@@ -26,7 +25,6 @@ const Course=({course})=>{
     return (
         <div>{
             course.map(val=>{
-                console.log(val.parts)
                 return(
                     <div key={val.id}>
                         <Header course={val.name} />
