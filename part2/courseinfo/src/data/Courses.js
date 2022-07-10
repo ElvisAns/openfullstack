@@ -5,12 +5,12 @@ const courses_datas = [
       parts: [
         {
           name: 'Fundamentals of React',
-          exercises: 10,
+          exercises: 12,
           id: 1
         },
         {
           name: 'Fundamentals of Javascript',
-          exercises: 9,
+          exercises: 34,
           id: 1
         },
         {
@@ -25,7 +25,7 @@ const courses_datas = [
         },
         {
           name: 'Redux',
-          exercises: 11,
+          exercises: 15,
           id: 4
         }
       ]
@@ -36,12 +36,12 @@ const courses_datas = [
       parts: [
         {
           name: 'Routing',
-          exercises: 3,
+          exercises: 32,
           id: 1
         },
         {
           name: 'Middlewares',
-          exercises: 7,
+          exercises: 12,
           id: 2
         }
       ]
