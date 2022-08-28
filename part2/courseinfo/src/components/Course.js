@@ -51,16 +51,15 @@ const Course = (props) => {
     }
 
     const setCoursCredit = event =>{
-        console.log(event.target.value)
         updateCourseCredit(event.target.value)
     }
 
     const setCourseProgramName = event=>{
-
+        updateCourseProgram(event.target.value)
     }
 
     const setCourseName = event=>{
-
+        updateCourseName(event.target.value)
     }
 
     return (
