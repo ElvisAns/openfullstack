@@ -24,6 +24,13 @@ const global={
         input:{
             padding:'8px',
             margin: '4px 0px',
+        },
+        button:{
+            backgroundColor:"darkblue",
+            height:'40px',
+            color: 'white',
+            marginTop: '20px',
+            cursor: 'pointer'
         }
     }
 
