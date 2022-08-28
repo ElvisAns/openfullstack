@@ -44,9 +44,10 @@ const Course = (props) => {
 
     const addCourses = (event) => {
         event.preventDefault()
-        console.log(event.target)
-        const prev = {...course}
-        console.log(prev)
+        const prev = [...course]
+        /*
+        * Handle search and update or push to the object depending
+        */
         updateCourses(prev)
     }
 
