@@ -7,7 +7,16 @@ const Header = (props) => {
 
 const Form = (props) => {
     return (
-        <input type="text"></input>
+        <div style={props.style}>
+            <label style={props.style.label}>Course Name</label>
+            <input style={props.style.input} type="text" placeholder="course name" />
+            <label style={props.style.label}>Program Name</label>
+            <input style={props.style.input} type="text" placeholder="course name" />
+            <label style={props.style.label}>credits</label>
+            <input style={props.style.input} type="text" placeholder="course name" />
+
+            <button style={props.style.button} type="submit">Record</button>
+        </div>
     )
 }
 
@@ -36,7 +45,7 @@ const Course = (props) => {
     }
     return (
         <div style={global.body}>
-            <Form onsubmit={addCourses} />{
+            <Form style={global.form} onsubmit={addCourses} />{
                 course.map(val => {
                     return (
                         <div key={val.id}>
