@@ -1,4 +1,5 @@
 import global from "../styles/global"
+import {useState} from "react"
 
 const Header = (props)=>{
     return (<h1>{props.course}</h1>)
@@ -20,7 +21,9 @@ const Total= ({parts}) => {
     )
 }
 
-const Course=({course})=>{
+const Course=(props)=>{
+    const [course,updateCourses]=useState(props.course)
+
     return (
         <div style={global.body}>{
             course.map(val=>{
