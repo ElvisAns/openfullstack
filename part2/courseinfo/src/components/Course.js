@@ -7,13 +7,13 @@ const Header = (props) => {
 
 const Form = (props) => {
     return (
-        <form style={props.style}>
+        <form onSubmit={props.addCourses}  style={props.style}>
             <label style={props.style.label}>Course Name</label>
-            <input style={props.style.input} type="text" placeholder="course name" />
+            <input style={props.style.input} type="text" placeholder="course name" value={props.coursename} />
             <label style={props.style.label}>Program Name</label>
-            <input style={props.style.input} type="text" placeholder="program name" />
+            <input style={props.style.input} type="text" placeholder="program name"  value={props.coursecredit} />
             <label style={props.style.label}>credits</label>
-            <input style={props.style.input} type="number" placeholder="credits" />
+            <input style={props.style.input} type="number" placeholder="credits"  value={props.courseprocredit} />
 
             <button style={props.style.button} type="submit">Record</button>
         </form>
@@ -38,14 +38,20 @@ const Total = ({ parts }) => {
 
 const Course = (props) => {
     const [course, updateCourses] = useState(props.course)
+    const [coursename,updateCourseName]=useState("Elvis Ansima")
+    const [courseprogram,updateCourseProgram]=useState()
+    const [coursecredit,updateCourseCredit]=useState()
 
     const addCourses = (event) => {
-        const prev = { ...course }
+        event.preventDefault()
+        console.log(event.target)
+        const prev = {...course}
+        console.log(prev)
         updateCourses(prev)
     }
     return (
         <div style={global.body}>
-            <Form style={global.form} onsubmit={addCourses} />{
+            <Form courseprogram={courseprogram} coursename={coursename}  addCourses={addCourses} coursecredit={coursecredit} style={global.form}/>{
                 course.map(val => {
                     return (
                         <div key={val.id}>
