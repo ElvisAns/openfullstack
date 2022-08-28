@@ -9,11 +9,11 @@ const Form = (props) => {
     return (
         <form onSubmit={props.addCourses}  style={props.style}>
             <label style={props.style.label}>Course Name</label>
-            <input style={props.style.input} type="text" placeholder="course name" value={props.coursename} />
+            <input style={props.style.input} type="text" placeholder="course name" value={props.coursename} onChange={props.setCourseName} />
             <label style={props.style.label}>Program Name</label>
-            <input style={props.style.input} type="text" placeholder="program name"  value={props.coursecredit} />
+            <input style={props.style.input} type="text" placeholder="program name"  value={props.courseprogram} onChange={props.setCourseProgramName} />
             <label style={props.style.label}>credits</label>
-            <input style={props.style.input} type="number" placeholder="credits"  value={props.courseprocredit} />
+            <input style={props.style.input} type="number" placeholder="credits"  value={props.coursecredit} onChange={props.setCoursCredit} />
 
             <button style={props.style.button} type="submit">Record</button>
         </form>
@@ -39,8 +39,8 @@ const Total = ({ parts }) => {
 const Course = (props) => {
     const [course, updateCourses] = useState(props.course)
     const [coursename,updateCourseName]=useState("Elvis Ansima")
-    const [courseprogram,updateCourseProgram]=useState()
-    const [coursecredit,updateCourseCredit]=useState()
+    const [courseprogram,updateCourseProgram]=useState("")
+    const [coursecredit,updateCourseCredit]=useState("")
 
     const addCourses = (event) => {
         event.preventDefault()
@@ -49,9 +49,23 @@ const Course = (props) => {
         console.log(prev)
         updateCourses(prev)
     }
+
+    const setCoursCredit = event =>{
+        console.log(event.target.value)
+        updateCourseCredit(event.target.value)
+    }
+
+    const setCourseProgramName = event=>{
+
+    }
+
+    const setCourseName = event=>{
+
+    }
+
     return (
         <div style={global.body}>
-            <Form courseprogram={courseprogram} coursename={coursename}  addCourses={addCourses} coursecredit={coursecredit} style={global.form}/>{
+            <Form setCoursCredit={setCoursCredit} setCourseProgramName={setCourseProgramName} setCourseName={setCourseName} courseprogram={courseprogram} coursename={coursename}  addCourses={addCourses} coursecredit={coursecredit} style={global.form}/>{
                 course.map(val => {
                     return (
                         <div key={val.id}>
