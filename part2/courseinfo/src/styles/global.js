@@ -11,7 +11,22 @@ const global={
     number:{
         fontWeight:'900',
         color:'green'
+    },
+    form:{
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth:'300px',
+        label:{
+            color:"darkblue",
+            padding:'4px 0px',
+            margin: '4px 0px',
+        },
+        input:{
+            padding:'8px',
+            margin: '4px 0px',
+        }
     }
+
 }
 
 export default global
