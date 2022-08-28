@@ -7,16 +7,16 @@ const Header = (props) => {
 
 const Form = (props) => {
     return (
-        <div style={props.style}>
+        <form style={props.style}>
             <label style={props.style.label}>Course Name</label>
             <input style={props.style.input} type="text" placeholder="course name" />
             <label style={props.style.label}>Program Name</label>
-            <input style={props.style.input} type="text" placeholder="course name" />
+            <input style={props.style.input} type="text" placeholder="program name" />
             <label style={props.style.label}>credits</label>
-            <input style={props.style.input} type="text" placeholder="course name" />
+            <input style={props.style.input} type="number" placeholder="credits" />
 
             <button style={props.style.button} type="submit">Record</button>
-        </div>
+        </form>
     )
 }
 
