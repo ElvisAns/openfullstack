@@ -9,11 +9,11 @@ const Form = (props) => {
     return (
         <form onSubmit={props.addCourses} style={props.style}>
             <label style={props.style.label}>Program Name</label>
-            <input style={props.style.input} type="text" placeholder="program name" value={props.coursename} onChange={props.setCourseName} />
+            <input style={props.style.input} type="text" placeholder="program name" value={props.programName} onChange={props.setprogramName} />
             <label style={props.style.label}>Part Name</label>
-            <input style={props.style.input} type="text" placeholder="part name" value={props.courseprogram} onChange={props.setCourseProgramName} />
+            <input style={props.style.input} type="text" placeholder="part name" value={props.coursePart} onChange={props.setcoursePartName} />
             <label style={props.style.label}>Exercises</label>
-            <input style={props.style.input} type="number" placeholder="exercices" value={props.coursecredit} onChange={props.setCoursCredit} />
+            <input style={props.style.input} type="number" placeholder="exercices" value={props.courseExercices} onChange={props.setCoursCredit} />
 
             <button style={props.style.button} type="submit">Record</button>
         </form>
@@ -38,9 +38,9 @@ const Total = ({ parts }) => {
 
 const Course = (props) => {
     const [course, updateCourses] = useState(props.course)
-    const [coursename, updateCourseName] = useState("Redux")
-    const [courseprogram, updateCourseProgram] = useState("Half Stack application development")
-    const [coursecredit, updateCourseCredit] = useState("10")
+    const [programName, updateprogramName] = useState("Backend Development")
+    const [coursePart, updatecoursePart] = useState("SQLAlchemy")
+    const [courseExercices, updatecourseExercices] = useState("10")
 
     const addCourses = (event) => {
         event.preventDefault()
@@ -48,24 +48,24 @@ const Course = (props) => {
         /*
         * Handle search and update or push to the object depending on whever the course is new or not
         */
-        const search = prev.find(program => program.name === coursename)
+        const search = prev.find(program => program.name === programName)
         if (search) {
             const pos = prev.indexOf(search);
             prev[pos].parts.push({
-                name: coursename,
-                exercises: coursecredit,
+                name: coursePart,
+                exercises: parseInt(courseExercices),
                 id: prev[pos].parts.length + 1
             })
         }
         else {
             prev.push(
                 {
-                    name: coursename,
+                    name: programName,
                     id: prev.length + 1,
                     parts: [
                         {
-                            name: coursename,
-                            exercises: coursecredit,
+                            name: coursePart,
+                            exercises: parseInt(courseExercices),
                             id: 0
                         }
                     ]
@@ -77,31 +77,33 @@ const Course = (props) => {
     }
 
     const setCoursCredit = event => {
-        updateCourseCredit(event.target.value)
+        updatecourseExercices(event.target.value)
     }
 
-    const setCourseProgramName = event => {
-        updateCourseProgram(event.target.value)
+    const setcoursePartName = event => {
+        updatecoursePart(event.target.value)
     }
 
-    const setCourseName = event => {
-        updateCourseName(event.target.value)
+    const setprogramName = event => {
+        updateprogramName(event.target.value)
     }
 
     return (
         <div style={global.body}>
-            <Form setCoursCredit={setCoursCredit} setCourseProgramName={setCourseProgramName} setCourseName={setCourseName} courseprogram={courseprogram} coursename={coursename} addCourses={addCourses} coursecredit={coursecredit} style={global.form} />
-            {
-                course.map(val => {
-                    return (
-                        <div key={val.id}>
-                            <Header course={val.name} />
-                            <Content parts={val.parts} />
-                            <Total parts={val.parts} />
-                        </div>
-                    )
-                })
-            }
+        <Form setCoursCredit={setCoursCredit} setcoursePartName={setcoursePartName} setprogramName={setprogramName} coursePart={coursePart} programName={programName} addCourses={addCourses} courseExercices={courseExercices} style={global.form} />
+            <div>
+                {
+                    course.map(val => {
+                        return (
+                            <div key={val.id}>
+                                <Header course={val.name} />
+                                <Content parts={val.parts} />
+                                <Total parts={val.parts} />
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
