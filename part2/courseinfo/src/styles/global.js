@@ -6,7 +6,9 @@ const global={
     body:{
         backgroundColor:'#eee',
         padding:'90px',
-        borderRadius:'10px'
+        borderRadius:'10px',
+        display:'flex',
+        justifyContent: 'space-between'
     },
     number:{
         fontWeight:'900',
