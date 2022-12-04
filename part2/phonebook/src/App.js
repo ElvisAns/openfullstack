@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react'
+import AddForm from "./components/AddForm";
 
-function App() {
+const App = () => {
+  const [persons,updatePersons] = useState([])
+  const [newPerson,setNewPersonState] = useState("John Doe")
+  const [newPhone,setNewPhoneState] = useState("+1...");
+
+  const setNewPerson = (event)=>{
+    setNewPersonState(event.target.value)
+  }
+
+  const setNewPhone = (event)=>{
+    setNewPhoneState(event.target.value)
+  }
+
+  const saveUser = (event)=>{
+    event.preventDefault()
+    const old = [...persons];
+    const exists = old.filter(person=>person.name===newPerson)
+    if(exists.length){
+      alert("User Already registered");
+      return;
+    }
+
+    old.push({
+      name : newPerson,
+      phone : newPhone
+    })
+    updatePersons(old)
+    setNewPersonState("")
+    setNewPhoneState("")
+    alert(`${newPerson} successfully recorded`)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddForm saveUser={saveUser} setNewPhone={setNewPhone} newPhone={newPhone} newPerson={newPerson} setNewPerson={setNewPerson}/>
     </div>
   );
 }
