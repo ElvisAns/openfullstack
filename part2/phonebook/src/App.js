@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import AddForm from "./components/AddForm";
+import Phonebook from './components/PhoneBook';
 
 const App = () => {
   const [persons,updatePersons] = useState([])
@@ -35,6 +36,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <Phonebook persons={persons}/>
       <AddForm saveUser={saveUser} setNewPhone={setNewPhone} newPhone={newPhone} newPerson={newPerson} setNewPerson={setNewPerson}/>
     </div>
   );
