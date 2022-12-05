@@ -1,0 +1,46 @@
+body{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+table{
+    width: 300px;
+    margin: 30px 0px;
+}
+table,
+td {
+    border: 1px solid #333;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+.searchInput{
+    width: 300px;
+}
+
+form button{
+    background-color: #333;
+    color:white;
+    padding:5px;
+    margin:3px 0px;
+}
+
+input{
+    padding:6px 1px;
+}
+
+label{
+    padding:3px 0px;
+}
