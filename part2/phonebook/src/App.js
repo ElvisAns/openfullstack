@@ -6,11 +6,16 @@ import Search from './components/Search';
 import './default.css'
 
 const App = () => {
-  const [persons, updatePersons] = useState([])
+  const [persons, updatePersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
+  ])
   const [newPerson, setNewPersonState] = useState("John Doe")
   const [newPhone, setNewPhoneState] = useState("");
   const [personsToShow, updatePersonsToShowState] = useState("")
-  const [peronsFIltered, applyFilter] = useState([])
+  const [peronsFIltered, applyFilter] = useState(persons)
 
   const setNewPerson = (event) => {
     setNewPersonState(event.target.value)
@@ -35,7 +40,7 @@ const App = () => {
 
     old.push({
       name: newPerson,
-      phone: newPhone,
+      number: newPhone,
       id: old.length + 1
     })
 
