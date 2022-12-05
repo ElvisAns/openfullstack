@@ -5,7 +5,7 @@ const AddForm = (props) => {
             <input onChange={props.setNewPerson} value={props.newPerson} placeholder="John Doe" type="text"/>
 
             <label>Telephone</label>
-            <input onChange={props.setNewPhone} value={props.newPhone} placeholder="+1..." type="tel"/>
+            <input onChange={props.setNewPhone} value={props.newPhone} placeholder="+1" type="tel"/>
 
             <button>save</button>
 
