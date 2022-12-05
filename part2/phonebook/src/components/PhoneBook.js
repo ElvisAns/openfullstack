@@ -32,7 +32,7 @@ const Phonebook = (props) => {
                 </thead>
                 <tbody>
                     {
-                        list.map((v, i) => (<tr key={v.id}><td>{v.name}</td><td>{v.phone}</td></tr>))
+                        list.map((v, i) => (<tr key={v.id}><td>{v.name}</td><td>{v.number}</td></tr>))
                     }
                 </tbody>
             </table>
