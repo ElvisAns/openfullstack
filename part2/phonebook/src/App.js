@@ -1,21 +1,24 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import AddForm from "./components/AddForm";
 import Phonebook from './components/PhoneBook';
 import Search from './components/Search';
+import axios from 'axios'
 
 import './default.css'
 
 const App = () => {
-  const [persons, updatePersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  ])
+  const [persons, updatePersons] = useState([])
   const [newPerson, setNewPersonState] = useState("John Doe")
   const [newPhone, setNewPhoneState] = useState("");
   const [personsToShow, updatePersonsToShowState] = useState("")
   const [peronsFIltered, applyFilter] = useState(persons)
+
+  useEffect(()=>{
+    axios.get("//localhost:3001/persons").then(res=>{
+      applyFilter(res.data)
+      updatePersons(res.data)
+    })
+  },[])
 
   const setNewPerson = (event) => {
     setNewPersonState(event.target.value)
