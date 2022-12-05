@@ -35,8 +35,10 @@ const App = () => {
 
     old.push({
       name: newPerson,
-      phone: newPhone
+      phone: newPhone,
+      id: old.length + 1
     })
+
     updatePersons(old)
     //setNewPersonState("")
     //setNewPhoneState("")
@@ -47,12 +49,12 @@ const App = () => {
   const updatePersonsToShow = (event) => {
     const searchTerm = event.target.value.toLowerCase();
     updatePersonsToShowState(event.target.value);
-  
+
     if (searchTerm.length < 1) {
       applyFilter(persons)
       return
     }
-    const filter_result = persons.filter((v) => v.name.toLowerCase().indexOf(searchTerm)!== -1 );
+    const filter_result = persons.filter((v) => v.name.toLowerCase().indexOf(searchTerm) !== -1);
     applyFilter(filter_result)
   }
 
