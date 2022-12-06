@@ -10,7 +10,7 @@ function App() {
   const loadCountryData = (event)=>{
     const search = event.target.value;
     updateSearchText(search)
-    axios.get(`//restcountries.com/v3.1/name/${search}`).then(res=>{
+    axios.get(`https://restcountries.com/v3.1/name/${search}`).then(res=>{
       updateCountryDatas(res.data)
     })
   }
