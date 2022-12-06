@@ -26,13 +26,14 @@ const Phonebook = (props) => {
             <table>
                 <thead>
                     <tr>
-                        <th>Names</th>
-                        <td>Phone Number</td>
+                        <th width="40%">Names</th>
+                        <td width="40%">Phone Number</td>
+                        <td width="20%">Action</td>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        list.map((v, i) => (<tr key={v.id}><td>{v.name}</td><td>{v.number}</td></tr>))
+                        list.map((v, i) => (<tr key={v.id}><td>{v.name}</td><td>{v.number}</td><td><button onClick={() => props.deleteService(v.id, v.name)}>Delete</button></td></tr>))
                     }
                 </tbody>
             </table>
