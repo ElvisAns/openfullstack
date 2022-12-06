@@ -20,3 +20,20 @@ input{
   cursor:pointer;
   border-radius: 10px;
 }
+
+ul{
+  text-align: left;
+}
+
+.mainViewer{
+  text-align: center;
+}
+
+button{
+  color:white;
+  background-color: black;
+  border:1px solid rgb(45, 45, 248);
+  border-radius: 3px;
+  font-size: smaller;
+  cursor: pointer;
+}
