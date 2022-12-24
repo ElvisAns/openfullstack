@@ -3,10 +3,11 @@ const fs = require('fs')
 const crypto = require("crypto")
 const morgan = require('morgan')
 const db = require('./db.json')
+const cors = require('cors')
 const app = express()
 
 app.use(express.json())
-
+app.use(cors())
 morgan.token('request-body', function (req, res) { return JSON.stringify(req.body)})
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :request-body', {
@@ -81,7 +82,7 @@ app.post('/api/persons', (request, response) => {
         number,
     })
     fs.writeFileSync('./db.json', JSON.stringify(db_copy));
-    response.send({ response: `sucess add the user with id ${id} to the phonebook` })
+    response.send({ response: `success add the user with id ${id} to the phonebook` })
 })
 
 app.patch('/api/persons/:id', (request, response) => {
@@ -123,7 +124,7 @@ app.patch('/api/persons/:id', (request, response) => {
 
 
 })
-const PORT = 3001
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
