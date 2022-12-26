@@ -1,22 +1,24 @@
 import axios from 'axios'
 
+const base_url = process.env.ENV === "production" ? "https://service-phonebook.onrender.com" : "//localhost:3001"
+
 const getAll = () => {
-    const response = axios.get("//localhost:3001/persons")
+    const response = axios.get(`${base_url}/api/persons`)
     return response.then((res) => res.data)
 }
 
 const deleteById = (id) => {
-    const response = axios.delete(`//localhost:3001/persons/${id}`)
+    const response = axios.delete(`${base_url}/api/persons/${id}`)
     return response.then((res) => res.data)
 }
 
 const saveNew = (ob) => {
-    const response = axios.post("//localhost:3001/persons", ob)
+    const response = axios.post(`${base_url}/api/persons`, ob)
     return response.then((res) => res.data)
 }
 
 const updateOne = (id, ob) => {
-    const response = axios.patch(`//localhost:3001/persons/${id}`, ob)
+    const response = axios.patch(`${base_url}/api/persons/${id}`, ob)
     return response.then((res) => res.data)
 }
 
