@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const base_url = process.env.ENV === "production" ? "https://service-phonebook.onrender.com" : "//localhost:3001"
+const base_url = process.env.REACT_APP_ENV === "production" ? "https://service-phonebook.onrender.com" : "//localhost:3001"
 
 const getAll = () => {
     const response = axios.get(`${base_url}/api/persons`)
