@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build:ui": "rm -rf build && cd ..part2/phonebook && npm run build && cp -r build ../part3/phonebookbackend"
   },
   "author": "Elvis Ansima",
   "license": "MIT",
