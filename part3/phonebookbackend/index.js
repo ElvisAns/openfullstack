@@ -32,7 +32,7 @@ const errorHandler = (error, request, response, next) => {
     if (error.name === "CastError") {
         return response.status(400).send({ message: "malformatted id" });
     }
-    else if(err.name=== "ValidationError"){
+    else if(error.name=== "ValidationError"){
         return response.status(400).send({message:error.message})
     }
 
@@ -69,7 +69,7 @@ app.get("/api/persons/:id", (request, response, next) => {
         .catch((err) => next(err))
 });
 
-app.delete("/api/persons/:id", (request, response) => {
+app.delete("/api/persons/:id",  (request, response, next) => {
     const id = request.params.id;
     const person = phoneBook
         .findByIdAndDelete(id)
@@ -84,33 +84,9 @@ app.delete("/api/persons/:id", (request, response) => {
         .catch((err) => next(err))
 });
 
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", (request, response, next) => {
     const name = request.body.name;
     const number = request.body.number;
-
-    if (name === undefined || number === undefined) {
-        response
-            .status(400)
-            .send({ response: "Your request isnt sending necessary datas" })
-            .end();
-        return;
-    }
-
-    if (name.length < 5) {
-        response
-            .status(400)
-            .send({ response: "The name has to be 5characters long or more" })
-            .end();
-        return;
-    }
-
-    if (number.length < 10) {
-        response
-            .status(400)
-            .send({ response: "The number has to be 10characters long or more" })
-            .end();
-        return;
-    }
 
     phoneBook.find({ name: name }).then((res) => {
         if (res.length > 0) {
@@ -133,7 +109,7 @@ app.post("/api/persons", (request, response) => {
     });
 });
 
-app.patch("/api/persons/:id", (request, response) => {
+app.patch("/api/persons/:id", (request, response, next) => {
     const name = request.body.name;
     const number = request.body.number;
     const id = request.params.id;
@@ -145,27 +121,10 @@ app.patch("/api/persons/:id", (request, response) => {
                 //person is recorded
 
                 if (number !== undefined) {
-                    if (number.length < 10) {
-                        response
-                            .status(400)
-                            .send({
-                                response: "The number has to be 10characters long or more",
-                            })
-                            .end();
-                        process.exit(1);
-                    }
                     person.number = number;
                 }
 
                 if (name !== undefined) {
-                    if (name.length < 5) {
-                        response
-                            .status(400)
-                            .send({ response: "The name has to be 5characters long or more" })
-                            .end();
-
-                        process.exit(1);
-                    }
                     person.name = name;
                 }
 
