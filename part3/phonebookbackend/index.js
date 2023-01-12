@@ -26,6 +26,17 @@ app.use(
     )
 );
 
+const errorHandler = (error, request, response, next) => {
+    console.error(error.message);
+
+    if (error.name === "CastError") {
+        return response.status(400).send({ error: "malformatted id" });
+    }
+
+    next(error);
+};
+
+
 app.get("/api/persons", (request, response) => {
     phoneBook.find({}).then((res) => {
         response.json(res);
@@ -41,7 +52,7 @@ app.get("/info", (request, response) => {
     });
 });
 
-app.get("/api/persons/:id", (request, response) => {
+app.get("/api/persons/:id", (request, response, next) => {
     const id = request.params.id;
     const person = phoneBook
         .findById(id)
@@ -52,10 +63,7 @@ app.get("/api/persons/:id", (request, response) => {
                 response.status(404).send(notFound).end();
             }
         })
-        .catch((err) => {
-            response.status(500).send({ response: "malformatted id" }).end();
-            console.log("Error fetching id", err);
-        });
+        .catch((err) => next(err))
 });
 
 app.delete("/api/persons/:id", (request, response) => {
@@ -70,10 +78,7 @@ app.delete("/api/persons/:id", (request, response) => {
                 response.status(404).send(notFound).end();
             }
         })
-        .catch((err) => {
-            response.status(500).send({ response: "malformatted id" }).end();
-            console.log("Error fetching id", err);
-        });
+        .catch((err) => next(err))
 });
 
 app.post("/api/persons", (request, response) => {
@@ -105,22 +110,22 @@ app.post("/api/persons", (request, response) => {
     }
 
     phoneBook.find({ name: name }).then((res) => {
-        if (res.length>0){
+        if (res.length > 0) {
             response
                 .status(400)
                 .json({ response: "A similar name is already recorded" })
-                .end()
-        }
-        else {
+                .end();
+        } else {
             const person = new phoneBook({
                 name,
                 number,
             });
-            person.save().then((res) => {
-                response.send({ response: `success add the user to the phonebook` });
-            }).catch((e)=>{
-                console.log("Error creating entry",e)
-            });
+            person
+                .save()
+                .then((res) => {
+                    response.send({ response: `success add the user to the phonebook` });
+                })
+                .catch((err) => next(err))
         }
     });
 });
@@ -133,17 +138,20 @@ app.patch("/api/persons/:id", (request, response) => {
     const person = phoneBook
         .findById(id)
         .then((person) => {
-            if (person) { //person is recorded
+            if (person) {
+                //person is recorded
 
                 if (number !== undefined) {
                     if (number.length < 10) {
                         response
                             .status(400)
-                            .send({ response: "The number has to be 10characters long or more" })
+                            .send({
+                                response: "The number has to be 10characters long or more",
+                            })
                             .end();
-                        process.exit(1)
+                        process.exit(1);
                     }
-                    person.number = number
+                    person.number = number;
                 }
 
                 if (name !== undefined) {
@@ -153,29 +161,32 @@ app.patch("/api/persons/:id", (request, response) => {
                             .send({ response: "The name has to be 5characters long or more" })
                             .end();
 
-                        process.exit(1)
+                        process.exit(1);
                     }
-                    person.name = name
+                    person.name = name;
                 }
 
-                person.save().then((res) => {
-                    response.send({ response: `success updated the user with id ${id} to the phonebook` });
-                }).catch(err => {
-                    response.status(500).send({ response: "Server failed to process your request" }).end();
-                    console.log("Error", error);
-                })
-            }
-            else {
+                person
+                    .save()
+                    .then((res) => {
+                        response.send({
+                            response: `success updated the user with id ${id} to the phonebook`,
+                        });
+                    })
+                    .catch((err) => next(err));
+            } else {
                 const notFound = { response: "The person id not found in phone book" };
                 response.status(404).send(notFound).end();
-                process.exit(1)
+                process.exit(1);
             }
         })
-        .catch((err) => {
-            response.status(500).send({ response: "malformatted id" }).end();
-            console.log("Error fetching id", err);
-        });
+        .catch((err) => next(err));
 });
+
+
+// this has to be the last loaded middleware.
+app.use(errorHandler);
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
