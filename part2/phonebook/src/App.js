@@ -66,7 +66,7 @@ const App = () => {
         }).catch(err => {
           //alert("Error occured while trying to update the user datas")
           saveNotification({
-            message: "Error occured while trying to update the user datas",
+            message:err.response.data.message,
             error: true
           })
         })
@@ -96,7 +96,7 @@ const App = () => {
     }).catch(err => {
       //alert("An error occured while trying to save to phonebook")
       saveNotification({
-        message: "An error occured while trying to save to phonebook",
+        message:err.response.data.message,
         error: true
       })
     })
