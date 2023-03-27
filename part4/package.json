@@ -1,0 +1,25 @@
+{
+  "name": "blog-express",
+  "version": "1.0.0",
+  "description": "a simple blog made with express and react",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "serve": "node index.js"
+  },
+  "keywords": [
+    "express",
+    "react",
+    "fullstack",
+    "blog"
+  ],
+  "author": "ElvisANs",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "nodemon": "^2.0.22"
+  }
+}
