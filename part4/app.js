@@ -1,4 +1,5 @@
 const express = require('express')
+require('express-async-errors')
 const app = express()
 const cors = require('cors')
 const logger = require('./utils/logger')
@@ -6,6 +7,7 @@ const blogRouter = require('./controllers/blog')
 const mongoose = require('mongoose')
 const errorLogger = require('./middleware/errorLogger')
 const {MONGODB_URI,PORT} = require('./utils/config')
+
 
 logger.info('connecting to', MONGODB_URI)
 
