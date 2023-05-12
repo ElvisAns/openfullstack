@@ -1,7 +1,6 @@
 const {Router} = require('express')
 const blogRouter =  Router();
 const Blog = require('../models/blog');
-const { result } = require('lodash');
 
 blogRouter.get('/:id?', async (request, response,next) => {
     if(!request.params.id){
