@@ -1,27 +1,41 @@
-const express = require('express')
-require('express-async-errors')
-const app = express()
-const cors = require('cors')
-const logger = require('./utils/logger')
-const blogRouter = require('./controllers/blog')
-const mongoose = require('mongoose')
-const errorLogger = require('./middleware/errorLogger')
-const {MONGODB_URI,PORT} = require('./utils/config')
+const express = require("express");
+require("express-async-errors");
+const app = express();
+const cors = require("cors");
+const logger = require("./utils/logger");
+const blogRouter = require("./controllers/blog");
+const usersRouter = require("./controllers/users");
+const loginRouter = require("./controllers/login");
+const mongoose = require("mongoose");
 
+const {
+  requestLogger,
+  unknownEndpoint,
+  errorHandler,
+} = require("./middleware/errorLogger");
+const { tokenExtractor } = require("./middleware/tokenExtractor");
 
-logger.info('connecting to', MONGODB_URI)
+const { MONGODB_URI, PORT } = require("./utils/config");
 
-mongoose.connect(MONGODB_URI).then((connexion)=>{
-    logger.info("Connected to Mongo DB")
-}).catch(error=>{
-    logger.error("Error connecting to Mongo DB")
-})
+logger.info("connecting to", MONGODB_URI);
 
-app.use(cors())
-app.use(express.json())
-app.use(errorLogger.requestLogger)
-app.use('/api/blogs',blogRouter)
-app.use(errorLogger.unknownEndpoint)
-app.use(errorLogger.errorHandler)
+mongoose
+  .connect(MONGODB_URI)
+  .then((connexion) => {
+    logger.info("Connected to Mongo DB");
+  })
+  .catch((error) => {
+    logger.error("Error connecting to Mongo DB");
+  });
 
-module.exports = app
+app.use(cors());
+app.use(express.json());
+app.use(requestLogger);
+app.use(tokenExtractor);
+app.use("/api/login", loginRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/blogs", blogRouter);
+app.use(unknownEndpoint);
+app.use(errorHandler);
+
+module.exports = app;
