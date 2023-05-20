@@ -155,6 +155,26 @@ describe("Blog api test", () => {
     expect(likes).toBe(50);
   }, 10000);
 
+  test("Only post owner can delete a blog post", async () => {
+    let newBwoy = {
+      name: "NewBwoy",
+      username: "NewBwoy.test",
+      password: "12345678",
+    };
+    await api.post("/api/users").send(newBwoy).expect(201);
+
+    const { username, password } = newBwoy;
+    const userInfo = await api
+      .post("/api/login")
+      .send({ username, password })
+      .expect(200);
+    expect(userInfo.body.token).toBeDefined();
+
+    await api
+      .delete("/api/blogs/" + currentPostId)
+      .set("Authorization", `Bearer ${userInfo.body.token}`)
+      .expect(401);
+  });
   test("deleting a blog post should persist to the database", async () => {
     await api
       .delete("/api/blogs/" + currentPostId)
