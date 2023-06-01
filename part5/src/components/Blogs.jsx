@@ -11,7 +11,7 @@ const Blogs = () => {
                 <h1 className='text-4xl text-center text-primary font-bold tracking-wider'>Blogs posts</h1>
             </div>
 
-            <div className='w-100 min-h-24 px-24 py-10 flex flex-wrap gap-10'>
+            <div className='w-100 min-h-24 px-24 py-10 flex flex-wrap gap-10 justify-center'>
                 <div className="card card-compact w-96 bg-base-100 shadow-xl">
                     <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_0mLWu2GcjGJroj4TsRsbDiVrb18s_4EgQ&usqp=CAU" alt="Shoes" /></figure>
                     <div className="card-body">
