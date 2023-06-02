@@ -19,12 +19,12 @@ function App() {
         <Routes>
           <Route index path="/" element={<Welcome/>}></Route>
           <Route path="/blogs" element={<Blogs/>}></Route>
-          <Route element={<ProtectedRoute user={{ loggedIn: false }} />}>
+          <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Account/>}></Route>
           </Route>
-          <Route path='/signin' element={<Signin user={{ loggedIn: false }} />}></Route>
-          <Route path='/login' element={<Login user={{ loggedIn: false }} />}></Route>
-          <Route path="*" element={<p>There's nothing here: 404!</p>} />
+          <Route path='/signin' element={<Signin />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path="*" element={<p>There&lsquo;s nothing here: 404!</p>} />
         </Routes>
         <Footer />
       </BrowserRouter>

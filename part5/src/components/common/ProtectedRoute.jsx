@@ -1,9 +1,9 @@
 import { Outlet, Navigate } from 'react-router-dom'
-import { PropType } from 'prop-types'
+import { useSelector} from 'react-redux'
 
-const ProtectedRoute = ({ user }) => {
-    const { loggedIn } = user;
-    if (loggedIn) {
+const ProtectedRoute = () => {
+    const userInfo = useSelector((state) => state.user.userInfo)
+    if (userInfo.loggedIn) {
         return <Outlet />
     }
     else {
