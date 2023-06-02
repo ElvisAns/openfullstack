@@ -18,10 +18,12 @@ export const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.userInfo = action.payload;
+      axios.defaults.headers.common = { Authorization: `Bearer ${action.payload.token}` }
       localStorage.setItem("userAuth", JSON.stringify(action.payload));
     },
     logout: (state) => {
       state.userInfo = {};
+      delete axios.defaults.headers.common.Authorization;
       localStorage.removeItem("userAuth");
     },
   },
