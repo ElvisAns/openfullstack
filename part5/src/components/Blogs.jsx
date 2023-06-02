@@ -1,5 +1,15 @@
 import Helmet from 'react-helmet'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { useState } from 'react'
 const Blogs = () => {
+    const [blogs, setBlogs] = useState([])
+    useEffect(() => {
+        (async function getData() {
+            const blogs = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/blogs`)
+            setBlogs(blogs.data)
+        })()
+    }, [])
     return (
         <>
             <Helmet>
@@ -12,56 +22,22 @@ const Blogs = () => {
             </div>
 
             <div className='w-100 min-h-24 px-24 py-10 flex flex-wrap gap-10 justify-center'>
-                <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                    <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_0mLWu2GcjGJroj4TsRsbDiVrb18s_4EgQ&usqp=CAU" alt="Shoes" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Read more</button>
+                {blogs.map(
+                    (post, index) => (
+                        <div className="card card-compact w-96 bg-base-100 shadow-xl" key={index}>
+                            <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_0mLWu2GcjGJroj4TsRsbDiVrb18s_4EgQ&usqp=CAU" alt="Shoes" /></figure>
+                            <div className="card-body">
+                                <h2 className="card-title">{post.title}</h2>
+                                <p className="badge badge-secondary">Written by {post.author}</p>
+                                <div className="card-actions justify-end">
+                                    <button className="btn btn-primary">Read more</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                    <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_0mLWu2GcjGJroj4TsRsbDiVrb18s_4EgQ&usqp=CAU" alt="Shoes" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Read more</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                    <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_0mLWu2GcjGJroj4TsRsbDiVrb18s_4EgQ&usqp=CAU" alt="Shoes" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Read more</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                    <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_0mLWu2GcjGJroj4TsRsbDiVrb18s_4EgQ&usqp=CAU" alt="Shoes" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Read more</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                    <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_0mLWu2GcjGJroj4TsRsbDiVrb18s_4EgQ&usqp=CAU" alt="Shoes" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Read more</button>
-                        </div>
-                    </div>
-                </div>
+                    )
+                )
+
+                }
             </div>
         </>
     )
