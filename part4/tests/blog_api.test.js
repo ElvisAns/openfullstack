@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const supertest = require("supertest");
-const app = require("../app");
+const { app,connectDB } = require("../app");
 const Blog = require("../models/blog");
 const User = require("../models/user");
 const { before } = require("lodash");
@@ -30,6 +30,8 @@ let intialUser = {
 
 let currentUser = {};
 
+
+connectDB();
 const api = supertest(app);
 
 describe("Blog api test", () => {
