@@ -1,1 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;900&display=swap');
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background:  hsl(314 100% 47.059%);
+    transform-origin: 0%;
+  }
+  
