@@ -90,7 +90,7 @@ export default function Login() {
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="password" value={password} onChange={(e) => setPwd(e.target.value)} placeholder="password" className="input input-bordered" />
+                                    <input data-testid="passwordInput" type="password" value={password} onChange={(e) => setPwd(e.target.value)} placeholder="password" className="input input-bordered" />
                                     <label className="label text-red-700 text-xs">
                                         {error_message.password}
                                     </label>
