@@ -25,17 +25,18 @@ describe('App', () => {
         expect(emailInput).toBeInTheDocument();
         expect(passwordInput).toBeInTheDocument();
 
-        await user.type(emailInput,'ansimapersic@gmail.com');
+        await user.type(emailInput,'ansimapersic@gmail.com'); //we can fill a form input
         await user.type(passwordInput,'12345678');
 
         expect(emailInput).toHaveValue('ansimapersic@gmail.com')
-        expect(passwordInput).toHaveValue('12345678')
+        expect(passwordInput).toHaveValue('12345678') //we can test input value
 
 
         const submitButton = screen.getByRole('button',{name:'Login'}); 
         //role is like type of element and name is the content (for my undertanding) role can be listitem,list,heading,textbox(for inputs),button,link (for a element)
-        expect(submitButton).toBeInTheDocument();
-        await user.click(submitButton)
+        expect(submitButton).toBeInTheDocument(); //we can test element presence
+        expect(submitButton).toHaveStyle({display:'inline-block'}) //we can test css values
+        await user.click(submitButton)//we can click on a button
         expect(screen.getByText('Ansima')).toBeInTheDocument()
 
     });
