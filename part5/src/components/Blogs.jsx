@@ -71,24 +71,38 @@ const Blogs = () => {
                     setLoading(false)
                     setMessage("Blog create with success!")
 
-                    const elt = document.getElementById("alert");
-                    elt.scrollIntoView({ behavior: 'smooth' }, true);
-
                     setTimeout(() => {
                         setMessage('')
-                    }, 2000)
+                    }, 5000)
                 }
                 catch (e) {
-                    if (e.response.status == 401) {
-                        setMessage("Session lost, please reconnect!")
+                    if ('response' in e) {
+                        if (e.response.status == 401) {
+                            setMessage("Session lost, please reconnect!")
+                            setTimeout(() => {
+                                dispatch(logout())
+                                navigate('/login')
+                            }, 5000)
+                        }
+                        else {
 
-                        const elt = document.getElementById("alert");
-                        elt.scrollIntoView({ behavior: 'smooth' }, true);
-                        setTimeout(() => {
-                            dispatch(logout())
-                            navigate('/login')
-                        }, 2000)
+                            setMessage(e.response.data.error)
+                            setTimeout(() => {
+                                setMessage("")
+                            }, 5000)
+
+                        }
                     }
+                    else {
+                        setMessage(e.message)
+                        setTimeout(() => {
+                            setMessage('')
+                        }, 5000)
+                    }
+                }
+                finally {
+                    setLoading(false)
+                    window.scrollTo(0, 0);
                 }
             })()
 
@@ -106,23 +120,40 @@ const Blogs = () => {
             newBlogDispatcher({ type: 'clear' })
             setLoading(false)
             setMessage("Blog deleted with success!")
-            const elt = document.getElementById("alert");
-            elt.scrollIntoView({ behavior: 'smooth' }, true);
             setTimeout(() => {
                 setMessage('')
             }, 2000)
         }
         catch (e) {
-            if (e.response.status == 401) {
-                setMessage("Session lost, please reconnect!")
+            if ('response' in e) {
+                if (e.response.status == 401) {
+                    setMessage("Session lost, please reconnect!")
+                    setTimeout(() => {
+                        dispatch(logout())
+                        navigate('/login')
+                    }, 5000)
+                }
+                else {
+                    setMessage(e.message)
 
-                const elt = document.getElementById("alert");
-                elt.scrollIntoView({ behavior: 'smooth' }, true);
-                setTimeout(() => {
-                    dispatch(logout())
-                    navigate('/login')
-                }, 2000)
+                    const elt = document.getElementById("alert");
+                    elt.scrollIntoView({ behavior: 'smooth' }, true);
+                    setTimeout(() => {
+                        setMessage("")
+                    }, 5000)
+
+                }
             }
+            else {
+                setMessage(e.message)
+                setTimeout(() => {
+                    setMessage('')
+                }, 5000)
+            }
+        }
+        finally {
+            setLoading(false)
+            window.scrollTo(0, 0);
         }
     }
     return (
@@ -132,7 +163,7 @@ const Blogs = () => {
             </Helmet>
             <div className='bg-primary h-12 text-center'>
             </div>
-            {message && <div className="alert" id='__alert'>
+            {message && <div className="alert" id='alert'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span>{message}</span>
             </div>}
