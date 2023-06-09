@@ -3,13 +3,19 @@ const { Router } = require("express");
 const blogRouter = Router();
 const Blog = require("../models/blog");
 const User = require("../models/user");
+var _ = require("lodash");
 
 const { userExtractor } = require("../middleware/userExtractor");
 
 blogRouter.get("/:id?", async (request, response, next) => {
   if (!request.params.id) {
     const blogs = await Blog.find({}).populate("user", { username: 1, id: 1 }); //user is the field we want to auto populate
-    response.json(blogs).end();
+    const orderedBlogs = _.orderBy(
+      blogs,
+      ["likes"],
+      ["desc"]
+    );
+    response.json(orderedBlogs).end();
   } else {
     const blog = await Blog.findById(request.params.id);
     response.json(blog).end();
