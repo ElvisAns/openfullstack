@@ -24,7 +24,7 @@ const initialBlogs = [
 
 let intialUser = {
   name: "Test0014",
-  username: "Test004.test",
+  username: "Test004@test.com",
   password: "12345678",
 };
 

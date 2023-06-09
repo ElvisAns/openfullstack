@@ -7,7 +7,8 @@ const blogRouter = require("./controllers/blog");
 const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
 const mongoose = require("mongoose");
-
+const Blog = require("./models/blog");
+const User = require("./models/user");
 const {
   requestLogger,
   unknownEndpoint,
@@ -36,6 +37,17 @@ app.use(tokenExtractor);
 app.use("/api/login", loginRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/blogs", blogRouter);
+
+app.get("/reset", async (request, response) => {
+  if (process.env.NODE_ENV !== "test") {
+    response.status(401).end();
+  } else {
+    await User.deleteMany({});
+    await Blog.deleteMany({});
+    response.status(200).end();
+  }
+});
+
 app.use(unknownEndpoint);
 app.use(errorHandler);
 

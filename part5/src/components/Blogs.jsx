@@ -197,13 +197,13 @@ const Blogs = () => {
             <div className='w-100 min-h-24 px-24 py-10 flex flex-wrap gap-10 justify-center'>
                 {blogs.map(
                     (post, index) => (
-                        <div className="card card-compact w-96 bg-base-100 shadow-xl" key={index}>
+                        <div className="card card-compact w-96 bg-base-100 shadow-xl blog-item" key={index}>
                             <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_0mLWu2GcjGJroj4TsRsbDiVrb18s_4EgQ&usqp=CAU" alt="Shoes" /></figure>
                             <div className="card-body">
                                 <div className='flex flex-col md:flex-row w-100 justify-between card-title'>
-                                    <h2 >{post.title}</h2>
-                                    <h2>Likes: {post.likes}</h2>
-                                    {userInfo.name == post.author && <span className='text-red-600 cursor-pointer' onClick={() => deleteBlog(post.id)}>Delete</span>}
+                                    <h2 className='blog-title'>{post.title}</h2>
+                                    <h2 className='blog-likes'>Likes: {post.likes}</h2>
+                                    {userInfo.name == post.author && <span id={`delete${post.title.replace(/ /g,'')}`} className='text-red-600 cursor-pointer' onClick={() => deleteBlog(post.id)}>Delete</span>}
                                 </div>
                                 <p className="badge badge-secondary">Written by {post.author}</p>
                                 <div className="card-actions justify-end">
